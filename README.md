@@ -23,7 +23,7 @@ Our goal is to build Photo sharing application, where the user can upload/downlo
 * _ADVANCED: ADVANCED: enable image based searching (Search images to reveal copies with a known image)_
 
 ## Napkin diagram:
-![Persona_napkin_diagram](https://raw.githubusercontent.com/airavata-courses/Persona/main/Persona_napkin_diagram.png)
+![Persona_napkin_diagram](https://raw.githubusercontent.com/airavata-courses/Persona/main/ref/diagrams/Persona_napkin_diagram.png)
 
 
 ## User Action Flow Chart:
