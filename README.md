@@ -1,6 +1,6 @@
 # Persona
  # Spring 2021 Team:
-   1) Xiao Xiong
+   1) Xiao Xiong (the github account BrockDW and xixiong are both representing Xiao Xiong)
    2) Kenneth Zhang
    3) Saitheja Velmula
    4) Suresh Gunda
@@ -27,7 +27,7 @@ Our goal is to build Photo sharing application, where the user can upload/downlo
 
 
 ## User Action Flow Chart:
-
+![Persona_user action flow chart](https://raw.githubusercontent.com/airavata-courses/Persona/main/ref/diagrams/user_action_flow_chart.png)
 
 ## Architecture Diagram:
 
