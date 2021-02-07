@@ -22,12 +22,4 @@ Our goal is to build Photo sharing application, where the user can upload/downlo
 * Allow discovery of images with metadata search (Search for images with a text query)
 * _ADVANCED: ADVANCED: enable image based searching (Search images to reveal copies with a known image)_
 
-## Napkin diagram:
-![Persona_napkin_diagram](https://raw.githubusercontent.com/airavata-courses/Persona/main/ref/diagrams/Persona_napkin_diagram.png)
-
-
-## User Action Flow Chart:
-![Persona_user action flow chart](https://raw.githubusercontent.com/airavata-courses/Persona/main/ref/diagrams/user_action_flow_chart.png)
-
-## Architecture Diagram:
 
