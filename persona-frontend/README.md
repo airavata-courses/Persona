@@ -1,3 +1,7 @@
+# Persona Frontend
+
+Source code for the front end of Persona's web application.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
