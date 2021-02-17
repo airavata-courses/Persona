@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Header from "./../components/Header";
 import SearchBar from "./../components/SearchBar";
 import ImageViewPanel from "./../components/ImageViewPanel";
-
+// import SearchBar from "material-ui-search-bar";
+// import SearchBar from 'react-native-search-bar';
 // Page with photos uploaded by the user.
 class GalleryPage extends Component {
     // constructor(props) {
@@ -12,13 +13,13 @@ class GalleryPage extends Component {
     //     };
     // }
 
-    render() { 
-        return ( 
+    render() {
+        return (
             <div>
                 <Header />
                 <SearchBar />
                 <div>
-                    <h1>Your Gallery</h1>
+                    <h2>Your Gallery</h2>
                     <ImageViewPanel />
                     <button>upload</button>
                 </div>
@@ -26,5 +27,5 @@ class GalleryPage extends Component {
         );
     }
 }
- 
+
 export default GalleryPage;

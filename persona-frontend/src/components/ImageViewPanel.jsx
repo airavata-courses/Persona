@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Gallery from "react-photo-gallery";
-import image from "./../assets/images/0.jpg";
+// import image from "./../assets/images/0.jpg";
 import Popup from "reactjs-popup";
+// import SearchBar from "material-ui-search-bar";
+
 // import Carousel, { Modal, ModalGateway } from "react-images";
 
 
@@ -69,7 +71,7 @@ class ImageViewPanel extends Component {
     render() {
         return (
             <div>
-                <Gallery photos={this.state.myImageList} onClick={this.setViewClicked}></Gallery>
+                <Gallery photos={this.state.myImageList} onClick={this.setViewClicked} margin="2"></Gallery>
                 {/* <img src={image}></img>
                 {this.state.myImageList.map((curImg, index) => (
                     <img key={index} src={curImg.default} alt="not found"></img>
