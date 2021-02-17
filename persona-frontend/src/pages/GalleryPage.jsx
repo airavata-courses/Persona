@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
+import Header from "./../components/Header";
+import SearchBar from "./../components/SearchBar";
+import ImageViewPanel from "./../components/ImageViewPanel";
 
 // Page with photos uploaded by the user.
 class GalleryPage extends Component {
-    state = {  }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         myImageList: []
+    //     };
+    // }
+
     render() { 
         return ( 
             <div>
-                <h1>Gallery Page</h1>
+                <Header />
+                <SearchBar />
+                <div>
+                    <h1>Your Gallery</h1>
+                    <ImageViewPanel />
+                    <button>upload</button>
+                </div>
             </div>
         );
     }
