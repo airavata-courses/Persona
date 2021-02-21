@@ -5,7 +5,7 @@ from PIL import Image
 from PIL.ExifTags import TAGS
 import piexif
 import subprocess
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, insert
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils import database_exists, create_database
 
@@ -13,21 +13,27 @@ from sqlalchemy_utils import database_exists, create_database
 sampleImagePath = "C:\\Users\\Brock\\Persona\\persona-frontend\\src\\assets\images\\3.png"
 metadataProcess = "./tools/exiftool(-k).exe"
 
-engine = create_engine("mysql://root@localhost/newTest")
+engine = create_engine("mysql://root@localhost/metadataDB")
 if not database_exists(engine.url):
     create_database(engine.url)
 
 app = Flask(__name__)
 CORS(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root@localhost/newTest"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root@localhost/metadataDB"
 
 db = SQLAlchemy(app)
+# (image_name text, size int, image_type VARCHAR(255), width int, height int, color_type VARCHAR(255), megapixel int);"
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(255), unique=True, nullable=False)
-    email = db.Column(db.String(255), unique=True, nullable=False)
+class image_metadata(db.Model):
+    dataId = db.Column(db.Integer, primary_key=True)
+    image_name = db.Column(db.Text)
+    size = db.Column(db.Integer, nullable=False)
+    image_type = db.Column(db.String(255), nullable=False)
+    width  = db.Column(db.Integer, nullable=False)
+    height = db.Column(db.Integer, nullable=False)
+    megapixel = db.Column(db.Integer)
+
 
 @app.route('/')
 def hello():
@@ -39,10 +45,26 @@ def hello():
         line = tag.strip().split(':')
         infoDict[line[0].strip()] = line[-1].strip()
 
-    for k,v in infoDict.items():
-        print(k,':', v)
+    insertMetadata = image_metadata(
+        image_name=infoDict["File Name"], 
+        size=infoDict["File Size"], 
+        image_type=infoDict["File Type"], 
+        width=infoDict["Image Width"], 
+        height=infoDict["Image Height"],
+        megapixel=infoDict["Megapixels"])
+    
+    print(str(insertMetadata))
+    print(infoDict["File Name"])
 
-    print("I am triggered here")
+    db.session.add(insertMetadata)
+    db.session.commit()
+
+    
+
+    # for k,v in infoDict.items():
+    #     print(k,':', v)
+
+
     return {"a":"b"}
 
 
