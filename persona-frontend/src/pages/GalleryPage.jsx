@@ -2,16 +2,24 @@ import React, { Component } from 'react';
 import Header from "./../components/Header";
 import SearchBar from "./../components/SearchBar";
 import ImageViewPanel from "./../components/ImageViewPanel";
+import axios from 'axios';
 // import SearchBar from "material-ui-search-bar";
 // import SearchBar from 'react-native-search-bar';
 // Page with photos uploaded by the user.
 class GalleryPage extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         myImageList: []
-    //     };
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            // myImageList: []
+        };
+    }
+
+    testingFetch(){
+        alert("I am working here");
+        axios.get("http://127.0.0.1:5000/").then(res=>{
+            console.log(res);
+        })
+    }
 
     render() {
         return (
@@ -21,7 +29,7 @@ class GalleryPage extends Component {
                 <div>
                     <h2>Your Gallery</h2>
                     <ImageViewPanel />
-                    <button>upload</button>
+                    <button onClick={this.testingFetch}>upload</button>
                 </div>
             </div>
         );

@@ -24,21 +24,21 @@ class ImageViewPanel extends Component {
     }
 
     importAll(params) {
-        console.log(params);
+        // console.log(params);
         var allModule = params.keys().map(params);
         var resultList = []
         for (var i = 0; i < allModule.length; i++) {
             var randomWidth = Math.floor(Math.random() * 2) + 3;
             var randomHeight = Math.floor(Math.random() * 2) + 3;
-            console.log(randomWidth, randomHeight, typeof randomWidth, typeof 9);
+            // console.log(randomWidth, randomHeight, typeof randomWidth, typeof 9);
             resultList.push({
                 src: allModule[i].default,
                 width: randomWidth,
                 height: randomHeight
             })
-            console.log(allModule[i].default);
+            // console.log(allModule[i].default);
         }
-        console.log(allModule);
+        // console.log(allModule);
         return resultList;
     }
 
