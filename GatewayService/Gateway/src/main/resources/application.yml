@@ -3,7 +3,9 @@ zuul:
   file-service:
    url: http://localhost:2222
   user-service:
-   url: http://localhost:3333 
+   url: http://localhost:3333
+  metadata-service:
+    url: http://localhost:4444 
 
 ribbon:
   eureka:
@@ -21,4 +23,8 @@ eureka:
 spring:
   application:
     name: gateway
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
  
