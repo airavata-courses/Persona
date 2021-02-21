@@ -46,6 +46,8 @@ def metadata_extraction():
     # print(request.json["data"])
     sampleImagePath = request.json["data"]
     # sampleImagePath = BytesIO(base64.b64decode(sampleImagePath))
+
+    # add the following function to a loop
     sampleDataType, sampleData = sampleImagePath.split(",")
     print(sampleDataType)
     # jpgtxt = base64.encodestring(open("0.jpg","rb").read())
@@ -67,8 +69,8 @@ def metadata_extraction():
         line = tag.strip().split(':')
         infoDict[line[0].strip()] = line[-1].strip()
 
-    for k, v in infoDict.items():
-        print(k, ':', v)
+    # for k, v in infoDict.items():
+    #     print(k, ':', v)
 
     insertMetadata = image_metadata(
         image_name=infoDict["File Name"],
@@ -83,7 +85,7 @@ def metadata_extraction():
 
     db.session.add(insertMetadata)
     db.session.commit()
-    return {"a": "b"}
+    # until here
 
 
 if __name__ == "__main__":
