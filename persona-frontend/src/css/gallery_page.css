@@ -1,0 +1,16 @@
+.image-panel {
+    width: 80%;
+    
+    
+}
+
+.gallery-position {
+    position: relative;
+    left: 10%;
+}
+
+.gallery-update-button{
+    width: 50%;
+    position: relative;
+    left: 15%;
+}
