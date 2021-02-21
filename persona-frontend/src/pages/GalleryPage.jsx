@@ -26,7 +26,7 @@ class GalleryPage extends Component {
 
   updateImage(event) {
     console.log("I am triggered here fdafdsafdsa");
-    const curImg = event.target.files[0];
+    const curImg = event.target.files[0]; // original image
 
     var reader = new FileReader();
     reader.onloadend = () => {
@@ -39,11 +39,40 @@ class GalleryPage extends Component {
       if (curImg.type != "image/jpeg" && curImg.type != "image/png") {
         alert("Please provide a valid image file");
       } else {
+        let formData = new FormData();
+
+        formData.append("file", curImg);
+
+        var axiosHttp = axios.create({
+          baseURL: "http://localhost:8080",
+          headers: {
+            "Content-type": "application/json",
+          },
+        });
+
+
+        axiosHttp.post("/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          onUploadProgress,
+        });
+
+
         axios
-          .post("http://127.0.0.1:5000/extract", {data: reader.result})
+          .post("http://127.0.0.1:5000/extract", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }) // convert the images directly to a string
           .then((res) => {
             console.log(res);
           });
+        // axios
+        //   .post("http://127.0.0.1:5000/extract", { data: reader.result }) // base64 (save it to local)
+        //   .then((res) => {
+        //     console.log(res);
+        //   });
       }
     };
     reader.readAsDataURL(curImg);
