@@ -1,0 +1,36 @@
+# Service registers under this name
+# Control the InternalResourceViewResolver:
+spring:
+  application:
+    name: file-service
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+    
+  datasource:
+   url: jdbc:mysql://localhost:3306/userservice?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+   username: root
+   password:  12345678
+   driver-class-name: com.mysql.jdbc.Driver
+   
+  jpa:
+   hibernate:
+    ddl-auto: update
+    
+   show-sql: true
+ 
+# Discovery Server Access
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+
+server:
+ port: 2222
+ 
+drive:
+ 
+ 
+ 
+
