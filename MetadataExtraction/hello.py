@@ -86,6 +86,7 @@ def metadata_extraction():
     db.session.add(insertMetadata)
     db.session.commit()
     # until here
+    return "success"
 
 
 if __name__ == "__main__":
