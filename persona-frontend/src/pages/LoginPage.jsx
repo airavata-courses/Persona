@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-
+import Header from './../components/Header';
 // Login page for application
 class LoginPage extends Component {
   state = {};
   render() {
     return (
-      <div>
+      <div className="App">
+        <Header></Header>
         <h1>Persona.io</h1>
         <h5>Username: </h5>
         <input type="text" />

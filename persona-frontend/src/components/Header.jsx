@@ -20,7 +20,7 @@ class Header extends Component {
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/gallery">
                   Gallery
                 </a>
               </li>
