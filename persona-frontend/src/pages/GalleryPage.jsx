@@ -44,18 +44,18 @@ class GalleryPage extends Component {
         formData.append("file", curImg);
 
         var axiosHttp = axios.create({
-          baseURL: "http://localhost:8080",
+          baseURL: "http://localhost:2222",
           headers: {
             "Content-type": "application/json",
           },
         });
 
 
-        axiosHttp.post("/upload", formData, {
+        axiosHttp.post("file/upload/suresh", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-          onUploadProgress,
+          //onUploadProgress,
         });
 
 
