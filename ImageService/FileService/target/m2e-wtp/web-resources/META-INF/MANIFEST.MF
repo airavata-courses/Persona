@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: Brock
+Build-Jdk: 14.0.2
+Implementation-Title: FileService
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.file
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/FileService
+Created-By: Maven Integration for Eclipse
+

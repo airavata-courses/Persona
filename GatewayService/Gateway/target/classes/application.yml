@@ -1,0 +1,24 @@
+zuul:
+ routes:
+  file-service:
+   url: http://localhost:2222
+  user-service:
+   url: http://localhost:3333 
+
+ribbon:
+  eureka:
+   enabled: false
+
+server:
+ port: 8080
+ 
+ # Discovery Server Access
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+      
+spring:
+  application:
+    name: gateway
+ 
