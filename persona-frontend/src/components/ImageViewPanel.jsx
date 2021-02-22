@@ -43,11 +43,49 @@ class ImageViewPanel extends Component {
     return resultList;
   }
 
+  importAllGoogleDrive(curDict) {
+    var resultList = [];
+    for (var i = 0; i < curDict.length; i++) {
+      var randomWidth = Math.floor(Math.random() * 2) + 3;
+      var randomHeight = Math.floor(Math.random() * 2) + 3;
+      // console.log(randomWidth, randomHeight, typeof randomWidth, typeof 9);
+      resultList.push({
+        src: "https://drive.google.com/open?id=" + curDict[i].fileId,
+        width: randomWidth,
+        height: randomHeight,
+      });
+      // console.log(allModule[i].default);
+    }
+    // console.log(allModule);
+    return resultList;
+  }
+
   componentDidMount() {
+    // axios
+    //   .post("http://127.0.0.1:5000/getFile", formData, {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //     },
+    //   }) // convert the images directly to a string
+    //   .then((res) => {
+    //     console.log(res);
+    //   });
+
+    var sampleImages = [
+      {
+          "id": 3,
+          "fileName": "_MG_0807.JPG",
+          "fileId": "1SAlrBNvKo4-M4fO1DTIfo0ogzCBhD4UH",
+          "userName": "suresh"
+      },
+      {
+          "id": 2,
+          "fileName": "_MG_0829.JPG",
+          "fileId": "12RmPxrehGGkeOu4rzIyi9OiQ2KQdX1SS",
+          "userName": "suresh"
+      }]
     this.setState({
-      myImageList: this.importAll(
-        require.context("./../assets/images", false, /\.(png|jpe?g|svg)$/)
-      ),
+      myImageList: this.importAllGoogleDrive(sampleImages)
     });
   }
 
@@ -100,10 +138,6 @@ class ImageViewPanel extends Component {
           photos={this.state.myImageList}
           onClick={this.setViewClicked}
         ></Gallery>
-        {/* <img src={image}></img>
-                {this.state.myImageList.map((curImg, index) => (
-                    <img key={index} src={curImg.default} alt="not found"></img>
-                ))} */}
         <Popup
           open={this.state.viewClicked}
           modal
@@ -126,20 +160,6 @@ class ImageViewPanel extends Component {
             </div>
           )}
         </Popup>
-        {/* <ModalGateway>
-                    {this.state.viewClicked ? (
-                        <Modal onClose={this.setViewUnclick}>
-                            <Carousel
-                                currentIndex={this.state.viewID}
-                                views={this.state.myImageList.map(x => ({
-                                    ...x,
-                                    srcset: x.srcSet,
-                                    caption: x.title
-                                }))}
-                            />
-                        </Modal>
-                    ) : null}
-                </ModalGateway> */}
       </div>
     );
   }
