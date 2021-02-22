@@ -54,25 +54,24 @@ class GalleryPage extends Component {
         axiosHttp.post("/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-          },
-          onUploadProgress,
+          }
         });
 
 
-        axios
-          .post("http://127.0.0.1:5000/extract", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }) // convert the images directly to a string
-          .then((res) => {
-            console.log(res);
-          });
         // axios
-        //   .post("http://127.0.0.1:5000/extract", { data: reader.result }) // base64 (save it to local)
+        //   .post("http://127.0.0.1:5000/extract", formData, {
+        //     headers: {
+        //       "Content-Type": "multipart/form-data",
+        //     },
+        //   }) // convert the images directly to a string
         //   .then((res) => {
         //     console.log(res);
         //   });
+        axios
+          .post("http://127.0.0.1:5000/extract", { data: reader.result, filename: curImg.name}) // base64 (save it to local)
+          .then((res) => {
+            console.log(res);
+          });
       }
     };
     reader.readAsDataURL(curImg);
