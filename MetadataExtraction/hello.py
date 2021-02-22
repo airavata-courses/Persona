@@ -18,16 +18,31 @@ import base64
 # # print(jpgtxt)
 # metadataProcess = "./tools/exiftool(-k).exe"
 
-engine = create_engine("mysql://root@localhost/metadataDB")
+
+engine = create_engine("mysql+pymysql://root@localhost/metadataDB")
 if not database_exists(engine.url):
     create_database(engine.url)
 
 app = Flask(__name__)
 CORS(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root@localhost/metadataDB"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root@localhost/metadataDB"
 
 db = SQLAlchemy(app)
+
+
+# Converts size to bytes
+def file_size(size_string):
+    unit = size_string[-3:]
+    amount = float(size_string[0:-4])
+    if unit == 'KiB':
+        print("KiB")
+        return amount * 1024
+    elif unit == 'MiB':
+        print('MiB')
+        return amount * 1024 ** 2
+    else: 
+        return amount
 
 
 class image_metadata(db.Model):
@@ -52,7 +67,7 @@ def metadata_extraction():
     print(sampleDataType)
     # jpgtxt = base64.encodestring(open("0.jpg","rb").read())
     # print(jpgtxt)
-    metadataProcess = "./tools/exiftool(-k).exe"
+    metadataProcess = "exiftool"
 
     photoStorage = "imageToSave.png"
     if(sampleDataType == "data:image/jpeg;base64"):
@@ -74,7 +89,7 @@ def metadata_extraction():
 
     insertMetadata = image_metadata(
         image_name=infoDict["File Name"],
-        size=infoDict["File Size"],
+        size=file_size(infoDict["File Size"]),
         image_type=infoDict["File Type"],
         width=infoDict["Image Width"],
         height=infoDict["Image Height"],
