@@ -7,8 +7,9 @@ from sqlalchemy import create_engine, insert
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import base
 from sqlalchemy_utils import database_exists, create_database
-from io import BytesIO
+# from io import BytesIO
 import base64
+import platform
 
 
 # sampleImagePath = ""
@@ -67,7 +68,22 @@ def metadata_extraction():
     print(sampleDataType)
     # jpgtxt = base64.encodestring(open("0.jpg","rb").read())
     # print(jpgtxt)
+    plt = platform.system()
     metadataProcess = "exiftool"
+
+    if plt == "Windows":
+        print("Your system is Windows")
+        metadataProcess = "./tools/exiftool(-k).exe"
+        # do x y z
+    # elif plt == "Linux":
+    #     print("Your system is Linux")
+    #     # do x y z
+    # elif plt == "Darwin":
+    #     print("Your system is MacOS")
+    #     # do x y z
+    # else:
+    #     print("Unidentified system")
+    
 
     photoStorage = "imageToSave.png"
     if(sampleDataType == "data:image/jpeg;base64"):
