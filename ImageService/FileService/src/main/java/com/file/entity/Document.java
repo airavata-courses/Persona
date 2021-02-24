@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +25,18 @@ public class Document {
 
 	@Column(name = "USER_NAME")
 	private String userName;
+	
+	@Lob
+	private byte[] data;
+	
+	
+	public byte[] getData() {
+		return data;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
+	}
 
 	public Long getId() {
 		return id;

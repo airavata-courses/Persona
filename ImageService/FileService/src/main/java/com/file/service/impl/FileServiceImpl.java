@@ -49,6 +49,7 @@ public class FileServiceImpl implements FileService {
 				document.setFileId(fileId);
 				document.setFileName(file.getOriginalFilename());
 				document.setUserName(userName);
+				document.setData(file.getBytes());
 				documentRepo.save(document);
 			} catch (Exception e) {
 				logger.error("Error while upload document to drive ", e);
@@ -58,6 +59,8 @@ public class FileServiceImpl implements FileService {
 		return "SUCCESS";
 	}
 
+	
+	
 	@Override
 	public ByteArrayOutputStream download(List<Long> ids, String userName)
 			throws Exception {
@@ -82,6 +85,8 @@ public class FileServiceImpl implements FileService {
 		}
 		return null;
 	}
+	
+	
 
 	@Override
 	public Set<DocumentResponse> getFilesByUsername(String userName) {
