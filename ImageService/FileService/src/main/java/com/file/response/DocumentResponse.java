@@ -12,6 +12,16 @@ public class DocumentResponse {
 	private String fileId;
 
 	private String userName;
+	
+	private byte[]  data;
+
+	public byte[] getData() {
+		return data;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
+	}
 
 	public Long getId() {
 		return id;

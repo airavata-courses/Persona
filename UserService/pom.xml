@@ -44,7 +44,11 @@
 			<artifactId>spring-cloud-starter-eureka-server</artifactId>
 			<version>1.4.7.RELEASE</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.27.0-GA</version>
+		</dependency>
 
 		<dependency>
 			<groupId>mysql</groupId>
