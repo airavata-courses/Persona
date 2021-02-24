@@ -34,7 +34,7 @@ public class AppConfiguration {
 			.getDefaultInstance();
 
 	private static final java.io.File CREDENTIALS_FOLDER = new java.io.File(
-			"/Users/suresh/documents/GoogleDrive");
+			"/Users/Brock/documents/GoogleDrive");
 
 	private static final String CLIENT_SECRET_FILE_NAME = "client_secret.json";
 
