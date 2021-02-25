@@ -29,7 +29,5 @@ server:
  port: 2222
  
 drive:
- 
- 
- 
-
+  username: testsuresh41@gmail.com
+  password: Abcd@1234
