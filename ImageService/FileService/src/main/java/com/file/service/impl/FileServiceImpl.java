@@ -38,7 +38,9 @@ public class FileServiceImpl implements FileService {
 	@Override
 	public String upload(MultipartFile[] files, String userName)
 			throws Exception {
+		System.out.println("I am working here!!" + ":" + files.length + ":" + files);
 		for (MultipartFile file : files) {
+			System.out.println(files);
 			File targetFile = File.createTempFile(file.getOriginalFilename(),
 					"");
 			try (OutputStream outStream = new FileOutputStream(targetFile)) {

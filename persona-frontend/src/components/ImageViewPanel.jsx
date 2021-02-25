@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Gallery from "react-photo-gallery";
 // import image from "./../assets/images/0.jpg";
 import Popup from "reactjs-popup";
+import axios from "axios";
 // import SearchBar from "material-ui-search-bar";
 
 // import Carousel, { Modal, ModalGateway } from "react-images";
@@ -12,16 +13,33 @@ class ImageViewPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      myImageList: [1, 2, 3, 4, 5],
+      myImageList: [],
       viewClicked: false,
       viewID: 0,
       selectMultipleClicked: false,
+      status: "gallery",
+      username: "sure",
     };
 
     this.importAll = this.importAll.bind(this);
     this.setViewClicked = this.setViewClicked.bind(this);
     this.setViewUnclick = this.setViewUnclick.bind(this);
     this.triggerSelect = this.triggerSelect.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.state.status == "gallery") {
+      axios
+        .get(
+          "http://localhost:2222/file/getFiles?username=" + this.state.username
+        )
+        .then((res) => {
+          console.log(res);
+          this.setState({
+            myImageList: this.importAllGoogleDrive(res.data),
+          });
+        });
+    }
   }
 
   importAll(params) {
@@ -37,9 +55,7 @@ class ImageViewPanel extends Component {
         width: randomWidth,
         height: randomHeight,
       });
-      // console.log(allModule[i].default);
     }
-    // console.log(allModule);
     return resultList;
   }
 
@@ -48,45 +64,27 @@ class ImageViewPanel extends Component {
     for (var i = 0; i < curDict.length; i++) {
       var randomWidth = Math.floor(Math.random() * 2) + 3;
       var randomHeight = Math.floor(Math.random() * 2) + 3;
+      var nameSplit = curDict[i].fileName.split(".");
+      var imgType = nameSplit[nameSplit.length - 1];
+      var imgFileHeader = ""
+      console.log(imgType);
+      if (imgType == "jpg"){
+        imgFileHeader = "data:image/jpeg;base64,"
+      } else if (imgType == "png") {
+        imgFileHeader = "data:image/png;base64,"
+      } else {
+        continue;
+      }
       // console.log(randomWidth, randomHeight, typeof randomWidth, typeof 9);
       resultList.push({
-        src: "https://drive.google.com/open?id=" + curDict[i].fileId,
+        src: imgFileHeader + curDict[i].data,
         width: randomWidth,
         height: randomHeight,
       });
-      // console.log(allModule[i].default);
+      // console.log(i);
     }
     // console.log(allModule);
     return resultList;
-  }
-
-  componentDidMount() {
-    // axios
-    //   .post("http://127.0.0.1:5000/getFile", formData, {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //   }) // convert the images directly to a string
-    //   .then((res) => {
-    //     console.log(res);
-    //   });
-
-    var sampleImages = [
-      {
-          "id": 3,
-          "fileName": "_MG_0807.JPG",
-          "fileId": "1SAlrBNvKo4-M4fO1DTIfo0ogzCBhD4UH",
-          "userName": "suresh"
-      },
-      {
-          "id": 2,
-          "fileName": "_MG_0829.JPG",
-          "fileId": "12RmPxrehGGkeOu4rzIyi9OiQ2KQdX1SS",
-          "userName": "suresh"
-      }]
-    this.setState({
-      myImageList: this.importAllGoogleDrive(sampleImages)
-    });
   }
 
   setViewClicked(event, { photo, index }) {
@@ -112,7 +110,6 @@ class ImageViewPanel extends Component {
   };
 
   triggerSelect() {
-    // var curSelectState = this.state.selectMultipleClicked;
     this.setState({
       selectMultipleClicked: !this.state.selectMultipleClicked,
     });
@@ -156,7 +153,11 @@ class ImageViewPanel extends Component {
               >
                 &times;
               </button>
-              <img src={this.state.myImageList[this.state.viewID].src}></img>
+              {this.state.myImageList[this.state.viewID] != null ? (
+                <img src={this.state.myImageList[this.state.viewID].src}></img>
+              ) : (
+                <div></div>
+              )}
             </div>
           )}
         </Popup>

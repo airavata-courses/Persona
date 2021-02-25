@@ -16,6 +16,8 @@ class GalleryPage extends Component {
     };
   }
 
+  
+
   testingFetch() {
     alert("I am working here");
     axios
@@ -42,7 +44,7 @@ class GalleryPage extends Component {
       } else {
         let formData = new FormData();
 
-        formData.append("file", curImg);
+        formData.append("files", curImg);
 
         var axiosHttp = axios.create({
           baseURL: "http://localhost:2222",
@@ -56,6 +58,8 @@ class GalleryPage extends Component {
           headers: {
             "Content-Type": "multipart/form-data",
           }
+        }).then((res)=>{
+          console.log(res);
         });
 
 
@@ -68,11 +72,11 @@ class GalleryPage extends Component {
         //   .then((res) => {
         //     console.log(res);
         //   });
-        axios
-          .post("http://127.0.0.1:5000/extract", { data: reader.result, filename: curImg.name}) // base64 (save it to local)
-          .then((res) => {
-            console.log(res);
-          });
+        // axios
+        //   .post("http://127.0.0.1:5000/extract", { data: reader.result, filename: curImg.name}) // base64 (save it to local)
+        //   .then((res) => {
+        //     console.log(res);
+        //   });
       }
     };
     reader.readAsDataURL(curImg);
