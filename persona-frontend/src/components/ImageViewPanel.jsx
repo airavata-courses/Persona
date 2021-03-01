@@ -25,6 +25,7 @@ class ImageViewPanel extends Component {
     this.setViewClicked = this.setViewClicked.bind(this);
     this.setViewUnclick = this.setViewUnclick.bind(this);
     this.triggerSelect = this.triggerSelect.bind(this);
+    this.downloadAllImg = this.downloadAllImg.bind(this);
   }
 
   componentDidMount() {
@@ -66,12 +67,12 @@ class ImageViewPanel extends Component {
       var randomHeight = Math.floor(Math.random() * 2) + 3;
       var nameSplit = curDict[i].fileName.split(".");
       var imgType = nameSplit[nameSplit.length - 1];
-      var imgFileHeader = ""
+      var imgFileHeader = "";
       console.log(imgType);
-      if (imgType == "jpg"){
-        imgFileHeader = "data:image/jpeg;base64,"
+      if (imgType == "jpg") {
+        imgFileHeader = "data:image/jpeg;base64,";
       } else if (imgType == "png") {
-        imgFileHeader = "data:image/png;base64,"
+        imgFileHeader = "data:image/png;base64,";
       } else {
         continue;
       }
@@ -115,10 +116,38 @@ class ImageViewPanel extends Component {
     });
   }
 
+  downloadAllImg() {
+    axios
+      .post("http://localhost:2222/file/download?username=" + this.state.username, [1, 2, 3, 4], {responseType: "blob"}) // base64 (save it to local)
+      .then((res) => {
+        console.log(res);
+        var downloadTrigger = document.getElementById("downloadLink");
+        var curBlob = new Blob([res.data], {type: "zip"});
+        console.log(curBlob.type);
+        var fileUrl = window.URL.createObjectURL(curBlob);
+        downloadTrigger.href = fileUrl;
+        downloadTrigger.download = "all_image.zip"
+        downloadTrigger.click();
+        window.URL.revokeObjectURL(fileUrl);
+
+        // var curFile = new File([res.data], "alldata.zip");
+        // console.log(curFile.type, curFile.size, curFile.);
+      });
+  }
+
   render() {
     return (
       <div>
-        {!this.state.selectMultipleClicked ? (
+        <button
+          className="btn btn-primary"
+          onClick={this.downloadAllImg}
+          style={{ marginRight: "10px" }}
+        >
+          Download ALL
+        </button>
+        <button className="btn btn-primary">Share</button>
+        <a id="downloadLink" style={{display:"none"}}></a>
+        {/* {!this.state.selectMultipleClicked ? (
           <button className="btn btn-primary" onClick={this.triggerSelect}>
             Select Mutiple
           </button>
@@ -130,7 +159,7 @@ class ImageViewPanel extends Component {
             <button className="btn btn-primary">Download</button>
             <button className="btn btn-primary">Share</button>
           </div>
-        )}
+        )} */}
         <Gallery
           photos={this.state.myImageList}
           onClick={this.setViewClicked}

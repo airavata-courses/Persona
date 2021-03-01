@@ -69,16 +69,25 @@ public class FileServiceImpl implements FileService {
 		try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 			try (ZipOutputStream zos = new ZipOutputStream(baos)) {
 				for (Long id : ids) {
+					System.out.println(id);
 					Optional<Document> document = documentRepo.findById(id);
 					if (document.isPresent()) {
 						Document doc = document.get();
-						ZipEntry entry = new ZipEntry(doc.getFileName());
+						ZipEntry entry;
+						try {
+							entry = new ZipEntry(doc.getFileName());
+						}  catch (Exception e) {
+							entry = new ZipEntry(id + "_" + doc.getFileName());
+						}
+						
 						zos.putNextEntry(entry);
 						zos.write(googleDrive.download(doc.getFileId())
 								.toByteArray());
 					}
 				}
 			} catch (Exception e) {
+				System.out.println(e);
+				System.out.println("An error is triggered");
 
 			}
 			return baos;

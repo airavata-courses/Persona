@@ -33,6 +33,7 @@ public class AppConfiguration {
 	private static final JsonFactory JSON_FACTORY = JacksonFactory
 			.getDefaultInstance();
 
+	// automatically create the folder and insert the files
 	private static final java.io.File CREDENTIALS_FOLDER = new java.io.File(
 			"/Users/Brock/documents/GoogleDrive");
 
