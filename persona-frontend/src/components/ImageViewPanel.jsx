@@ -78,7 +78,9 @@ class ImageViewPanel extends Component {
       }
       // console.log(randomWidth, randomHeight, typeof randomWidth, typeof 9);
       resultList.push({
-        src: imgFileHeader + curDict[i].data,
+        // src: "https://drive.google.com/open?id=" + curDict[i].fileId,
+        // src: "https://drive.google.com/file/d/" + curDict[i].fileId + "/view",
+        src: "https://drive.google.com/uc?export=view&id=" + curDict[i].fileId,
         width: randomWidth,
         height: randomHeight,
       });
@@ -118,15 +120,19 @@ class ImageViewPanel extends Component {
 
   downloadAllImg() {
     axios
-      .post("http://localhost:2222/file/download?username=" + this.state.username, [1, 2, 3, 4], {responseType: "blob"}) // base64 (save it to local)
+      .post(
+        "http://localhost:2222/file/download?username=" + this.state.username,
+        [1, 8, 9, 10, 11],
+        { responseType: "blob" }
+      ) // base64 (save it to local)
       .then((res) => {
         console.log(res);
         var downloadTrigger = document.getElementById("downloadLink");
-        var curBlob = new Blob([res.data], {type: "zip"});
+        var curBlob = new Blob([res.data], { type: "zip" });
         console.log(curBlob.type);
         var fileUrl = window.URL.createObjectURL(curBlob);
         downloadTrigger.href = fileUrl;
-        downloadTrigger.download = "all_image.zip"
+        downloadTrigger.download = "all_image.zip";
         downloadTrigger.click();
         window.URL.revokeObjectURL(fileUrl);
 
@@ -138,6 +144,8 @@ class ImageViewPanel extends Component {
   render() {
     return (
       <div>
+        {/* <img src="https://drive.google.com/uc?export=view&id=1GjQt2RO1s_0HTWZSsiw46SqFMJOuRADd"></img>
+        <img src='https://drive.google.com/uc?export=view&amp;id=1GjQt2RO1s_0HTWZSsiw46SqFMJOuRADd'/> */}
         <button
           className="btn btn-primary"
           onClick={this.downloadAllImg}
@@ -146,7 +154,7 @@ class ImageViewPanel extends Component {
           Download ALL
         </button>
         <button className="btn btn-primary">Share</button>
-        <a id="downloadLink" style={{display:"none"}}></a>
+        <a id="downloadLink" style={{ display: "none" }}></a>
         {/* {!this.state.selectMultipleClicked ? (
           <button className="btn btn-primary" onClick={this.triggerSelect}>
             Select Mutiple

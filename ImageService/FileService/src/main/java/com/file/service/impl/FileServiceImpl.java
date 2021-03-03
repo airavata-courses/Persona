@@ -67,35 +67,40 @@ public class FileServiceImpl implements FileService {
 	public ByteArrayOutputStream download(List<Long> ids, String userName)
 			throws Exception {
 		try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-			ZipOutputStream zos = new ZipOutputStream(baos);
-//			try (ZipOutputStream zos = new ZipOutputStream(baos)) {
+//			ZipOutputStream zos = new ZipOutputStream(baos);
+			try (ZipOutputStream zos = new ZipOutputStream(baos)) {
 				for (Long id : ids) {
 					
 					Optional<Document> document = documentRepo.findById(id);
 					if (document.isPresent()) {
 						Document doc = document.get();
 						ZipEntry entry;
-						try {
-							System.out.println(id);
-							entry = new ZipEntry(doc.getFileName());
-							zos.putNextEntry(entry);
-							zos.write(googleDrive.download(doc.getFileId())
-									.toByteArray());
-						}  catch (Exception e) {
-							System.out.println(e);
-//							System.out.println(zos.entr);
-							continue;
-//							entry = new ZipEntry(id + "_" + doc.getFileName());
-						}
+						System.out.println(id);
+						entry = new ZipEntry(doc.getFileName());
+						zos.putNextEntry(entry);
+						zos.write(googleDrive.download(doc.getFileId())
+								.toByteArray());
+//						try {
+//							System.out.println(id);
+//							entry = new ZipEntry(doc.getFileName());
+//							zos.putNextEntry(entry);
+//							zos.write(googleDrive.download(doc.getFileId())
+//									.toByteArray());
+//						}  catch (Exception e) {
+//							System.out.println(e);
+////							System.out.println(zos.entr);
+//							continue;
+////							entry = new ZipEntry(id + "_" + doc.getFileName());
+//						}
 						
 						
 					}
 				}
-//			} catch (Exception e) {
-//				System.out.println(e);
-//				System.out.println("An error is triggered");
-//
-//			}
+			} catch (Exception e) {
+				System.out.println(e);
+				System.out.println("An error is triggered");
+
+			}
 			return baos;
 		} catch (Exception e) {
 

@@ -14,7 +14,7 @@ import com.user.service.UserService;
 
 @RestController
 @RequestMapping("user")
-public class UserController {
+public class UserController2 {
 
 	@Autowired
 	private UserService userService;
