@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import { GoogleLogin } from "react-google-login";
+import axios from "axios";
 
 class LoginGoogle extends Component {
   responseGoogle = (response) => {
     console.log("Success");
     console.log(response);
+
+    const id = { userName: response["profileObj"]["email"] };
+    axios
+      .post("http://localhost:3333/user/save", id)
+      .then((response) => console.log(response));
     window.location = "/gallery";
   };
 
