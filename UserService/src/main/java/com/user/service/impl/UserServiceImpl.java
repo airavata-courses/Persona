@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String saveUser(String userName) {
+		System.out.println(userName);
 		Optional<User> optUser = userRepo.findByUserName(userName);
 		if (!optUser.isPresent()) {
 			User user = new User();

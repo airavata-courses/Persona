@@ -16,10 +16,24 @@ class LoginPage extends Component {
     console.log(this.state.status);
   };
 
-  componentDidMount(){
-    var code = window.location.href.split("?code=")[1]
-    if(code){
-      window.location.href = "/gallery"
+  componentDidMount() {
+    var code = window.location.href.split("?code=")[1];
+    if (code) {
+      // alert("I am triggered here");
+      axios
+        .post(
+          "http://localhost:3333/user/save",
+          { userName: code },
+          {
+            headers: {
+              "Content-type": "application/json"
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          window.location.href = "/gallery";
+        });
     }
   }
 
@@ -29,7 +43,7 @@ class LoginPage extends Component {
     this.setState({ account });
   };
 
-  handleGithubLogin(){
+  handleGithubLogin() {
     // console.log(process.env.REACT_APP_GITHUB_CLIENT_ID);
     // alert("I want to login with github", process.env.REACT_APP_GITHUB_CLIENT_ID);
   }
@@ -38,7 +52,6 @@ class LoginPage extends Component {
     account: {
       userName: "",
       password: "",
-      
     },
     client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
     // callback_url: process.env.REACT_APP_GITHUB_CALLBACK_URL,
@@ -76,7 +89,11 @@ class LoginPage extends Component {
             <LoginGoogle />
           </li>
           <li class="nav-item">
-            <a class="nav-link" href={`https://github.com/login/oauth/authorize?scope=user&client_id=${this.state.client_id}&redirect_uri=${this.state.callback_url}`} onClick={this.handleGithubLogin}>
+            <a
+              class="nav-link"
+              href={`https://github.com/login/oauth/authorize?scope=user&client_id=${this.state.client_id}&redirect_uri=${this.state.callback_url}`}
+              onClick={this.handleGithubLogin}
+            >
               Log in with GitHub
             </a>
           </li>
