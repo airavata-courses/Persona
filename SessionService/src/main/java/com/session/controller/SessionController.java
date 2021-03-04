@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import com.google.gson.Gson;
 import com.session.service.SessionService;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin
 @RestController
 public class SessionController {
 	
