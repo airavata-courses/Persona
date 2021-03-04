@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "./../components/Header";
 import axios from "axios";
+import LoginGoogle from "./LoginGoogle";
 
 // Login page for application
 class LoginPage extends Component {
@@ -15,6 +16,13 @@ class LoginPage extends Component {
     console.log(this.state.status);
   };
 
+  componentDidMount(){
+    var code = window.location.href.split("?code=")[1]
+    if(code){
+      window.location.href = "/gallery"
+    }
+  }
+
   handleChange = ({ currentTarget: input }) => {
     const account = { ...this.state.account };
     account["userName"] = input.value;
@@ -22,8 +30,8 @@ class LoginPage extends Component {
   };
 
   handleGithubLogin(){
-    console.log(process.env.REACT_APP_GITHUB_CLIENT_ID);
-    alert("I want to login with github", process.env.REACT_APP_GITHUB_CLIENT_ID);
+    // console.log(process.env.REACT_APP_GITHUB_CLIENT_ID);
+    // alert("I want to login with github", process.env.REACT_APP_GITHUB_CLIENT_ID);
   }
 
   state = {
@@ -33,7 +41,8 @@ class LoginPage extends Component {
       
     },
     client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
-    callback_url: process.env.REACT_APP_GITHUB_CALLBACK_URL,
+    // callback_url: process.env.REACT_APP_GITHUB_CALLBACK_URL,
+    callback_url: "http://localhost:3000",
     status: "",
   };
   render() {
@@ -64,9 +73,7 @@ class LoginPage extends Component {
 
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" href="#">
-              Log in with Google
-            </a>
+            <LoginGoogle />
           </li>
           <li class="nav-item">
             <a class="nav-link" href={`https://github.com/login/oauth/authorize?scope=user&client_id=${this.state.client_id}&redirect_uri=${this.state.callback_url}`} onClick={this.handleGithubLogin}>
