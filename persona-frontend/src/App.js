@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <Route path="/gallery" exact component={GalleryPage} />
-      <Route path="/" exact component={LoginTest} />
+      <Route path="/" exact component={LoginPage} />
     </Router>
   );
 }

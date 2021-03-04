@@ -21,11 +21,19 @@ class LoginPage extends Component {
     this.setState({ account });
   };
 
+  handleGithubLogin(){
+    console.log(process.env.REACT_APP_GITHUB_CLIENT_ID);
+    alert("I want to login with github", process.env.REACT_APP_GITHUB_CLIENT_ID);
+  }
+
   state = {
     account: {
       userName: "",
       password: "",
+      
     },
+    client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
+    callback_url: process.env.REACT_APP_GITHUB_CALLBACK_URL,
     status: "",
   };
   render() {
@@ -61,7 +69,7 @@ class LoginPage extends Component {
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href={`https://github.com/login/oauth/authorize?scope=user&client_id=${this.state.client_id}&redirect_uri=${this.state.callback_url}`} onClick={this.handleGithubLogin}>
               Log in with GitHub
             </a>
           </li>

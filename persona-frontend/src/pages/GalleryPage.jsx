@@ -90,9 +90,9 @@ class GalleryPage extends Component {
 
   render() {
     return (
-      <div className="gallery-position">
+      <div>
         <Header />
-        <SearchBar />
+        <div className="gallery-position">
         <div>
           <h2>Your Gallery</h2>
           <div className="image-panel">
@@ -117,6 +117,8 @@ class GalleryPage extends Component {
           <br />
         </div>
       </div>
+      </div>
+      
     );
   }
 }
