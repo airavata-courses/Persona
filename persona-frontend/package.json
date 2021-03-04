@@ -13,6 +13,7 @@
     "react-google-login": "^5.2.2",
     "react-photo-gallery": "^8.0.0",
     "react-router-dom": "^5.2.0",
+    "react-s-alert": "^1.4.1",
     "react-scripts": "4.0.2",
     "reactjs-popup": "^2.0.4",
     "web-vitals": "^1.1.0"
