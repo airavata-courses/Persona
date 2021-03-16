@@ -19,7 +19,6 @@ class LoginPage extends Component {
   componentDidMount() {
     var code = window.location.href.split("?code=")[1];
     if (code) {
-      // alert("I am triggered here");
       axios
         .post(
           "http://localhost:3333/user/save",
@@ -32,6 +31,7 @@ class LoginPage extends Component {
         )
         .then((response) => {
           console.log(response);
+          localStorage.setItem();
           window.location.href = "/gallery";
         });
     }

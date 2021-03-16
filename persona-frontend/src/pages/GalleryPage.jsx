@@ -12,7 +12,7 @@ class GalleryPage extends Component {
     super(props);
     this.state = {
       // myImageList: []
-      username: "sure"
+      username: localStorage.getItem()
     };
   }
 
@@ -64,6 +64,8 @@ class GalleryPage extends Component {
           .post("http://127.0.0.1:5000/extract", { data: reader.result, filename: curImg.name}) // base64 (save it to local)
           .then((res) => {
             console.log(res);
+            window.location.reload();
+          }).catch((err) => {
             window.location.reload();
           });
           

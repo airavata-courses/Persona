@@ -80,7 +80,8 @@ class ImageViewPanel extends Component {
       resultList.push({
         // src: "https://drive.google.com/open?id=" + curDict[i].fileId,
         // src: "https://drive.google.com/file/d/" + curDict[i].fileId + "/view",
-        src: "https://drive.google.com/uc?export=view&id=" + curDict[i].fileId,
+        // src: "https://drive.google.com/uc?export=view&id=" + curDict[i].fileId,
+        src: imgFileHeader + curDict[i].data,
         width: randomWidth,
         height: randomHeight,
       });

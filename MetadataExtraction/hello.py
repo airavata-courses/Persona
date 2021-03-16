@@ -7,7 +7,6 @@ from sqlalchemy import create_engine, insert
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import base
 from sqlalchemy_utils import database_exists, create_database
-# from io import BytesIO
 import base64
 import platform
 

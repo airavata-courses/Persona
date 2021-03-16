@@ -62,14 +62,7 @@ public class FileController {
 		return fileService.getFilesByUsername(userName);
 		
 	}
-	
-	
-	
-	
-	
 	//Gateway -> 8080
 	//ileservice ->2222
-	
 	//userservice> 3333
-
 }
