@@ -30,16 +30,16 @@ public class SessionController {
 		
 
 	}
-	@PostMapping("/validate")
-	public boolean validateSession(@RequestBody String body) {
+	@PostMapping("/Authenticate")
+	public boolean authenticateSession(@RequestBody String body) {
 		String sessionId=(String) new Gson().fromJson(body, Map.class).get("sessionId");
 		if(sessionId!=null) {
 			return sessionService.validateSession(sessionId);
 		}
 		return false;
 	}
-	@PostMapping("/invalidate")
-	public String invalidateSession(@RequestBody String body) {
+	@PostMapping("/unAuthorize")
+	public String unAuthorizeSession(@RequestBody String body) {
 		String sessionId=(String) new Gson().fromJson(body, Map.class).get("sessionId");
 		if(sessionId!=null) {
 			return sessionService.invalidateSession(sessionId);

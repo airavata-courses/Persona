@@ -7,15 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.session.entity.SessionEntity;
-import com.session.repository.ISessionRepository;
+import com.session.repository.RestSessionRepository;
 
 @Service
 public class SessionService {
 	
-	private final int timeout=1800000;
+	private final int timeout=1200000;
 	
 	@Autowired
-	private ISessionRepository sessionRepository;
+	private RestSessionRepository sessionRepository;
 	
 	public String createSession(String username) {
 		SessionEntity session= sessionRepository.findByUsername(username);
