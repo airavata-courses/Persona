@@ -19,14 +19,14 @@ import platform
 # metadataProcess = "./tools/exiftool(-k).exe"
 
 
-engine = create_engine("mysql+pymysql://root@localhost/metadataDB")
+engine = create_engine("mysql+pymysql://root:12345678@docker-mysql/metadataDB")
 if not database_exists(engine.url):
     create_database(engine.url)
 
 app = Flask(__name__)
 CORS(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root@localhost/metadataDB"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:12345678@docker-mysql/metadataDB"
 
 db = SQLAlchemy(app)
 
