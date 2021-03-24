@@ -8,7 +8,7 @@ jobs:
       - setup_remote_docker
       - checkout
       - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASS
-      - run: cd UserService && ls -la && mvn clean install package && docker image build . -t userservice-mysql:latest && docker tag userservice-mysql:latest $DOCKER_USERNAME/user-service-mysql:latest
+      - run: cd UserService && ls -la && mvn clean install package && docker image build . -t userservice-mysql:latest && docker tag userservice-mysql:latest  $DOCKER_USERNAME/user-service-mysql:latest
       - run: docker push $DOCKER_USERNAME/user-service-mysql:latest
 
 workflows:
