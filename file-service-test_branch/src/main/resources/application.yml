@@ -1,0 +1,35 @@
+# Service registers under this name
+# Control the InternalResourceViewResolver:
+spring:
+  application:
+    name: file-service
+    
+  #datasource:
+        #url: jdbc:mysql://docker-mysql:3306/test?useSSL=false
+        #username: user
+        #password: password
+        
+  datasource:
+        url: jdbc:mysql://localhost:3306/userservice?useSSL=false
+        username: root
+        password: 12345678
+   
+  jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+ 
+
+# Discovery Server Access
+#eureka:
+ # client:
+   # serviceUrl:
+   #   defaultZone: http://localhost:1111/eureka/
+
+    
+server:
+  port: 2222
