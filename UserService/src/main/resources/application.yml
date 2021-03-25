@@ -4,8 +4,13 @@ spring:
   application:
     name: user-service
     
+  #datasource:
+        #url: jdbc:mysql://localhost:3306/userservice?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+        #username: root
+        #password: 12345678
+  
   datasource:
-        url: jdbc:mysql://localhost:3306/userservice?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+        url: jdbc:mysql://mysql/userservice?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
         username: root
         password: 12345678
    
