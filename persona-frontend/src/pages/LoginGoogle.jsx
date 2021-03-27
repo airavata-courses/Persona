@@ -10,7 +10,10 @@ class LoginGoogle extends Component {
     const id = { userName: response["profileObj"]["email"] };
     axios
       .post("http://localhost:3333/user/save", id)
-      .then((response) => console.log(response));
+      .then((response) => {
+        localStorage.setItem("username", id);
+        console.log(response)
+      });
     window.location = "/gallery";
   };
 

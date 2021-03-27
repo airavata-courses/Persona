@@ -18,7 +18,7 @@ class ImageViewPanel extends Component {
       viewID: 0,
       selectMultipleClicked: false,
       status: "gallery",
-      username: "sure",
+      username: localStorage.getItem("username"),
     };
 
     this.importAll = this.importAll.bind(this);

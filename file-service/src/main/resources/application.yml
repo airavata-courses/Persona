@@ -1,0 +1,56 @@
+# Service registers under this name
+# Control the InternalResourceViewResolver:
+spring:
+  application:
+<<<<<<< HEAD:UserService/target/classes/application.yml
+    name: user-service
+    
+  datasource:
+        url: jdbc:mysql://localhost:3306/userservice?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+        username: root
+=======
+    name: file-service
+    
+  #datasource:
+        #url: jdbc:mysql://docker-mysql:3306/test?useSSL=false
+        #username: user
+        #password: password
+        
+  datasource:
+        url: jdbc:mysql://localhost:3306/userservice?useSSL=false
+        username: root
+        password: 12345678
+>>>>>>> d2dfbdad7b24a9e2fc9820ff25e638e24cfaa43e:file-service/src/main/resources/application.yml
+   
+  jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+ 
+
+# Discovery Server Access
+<<<<<<< HEAD:UserService/target/classes/application.yml
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+
+    
+server:
+  port: 3333   # HTTP (Tomcat) port
+  
+  
+=======
+#eureka:
+ # client:
+   # serviceUrl:
+   #   defaultZone: http://localhost:1111/eureka/
+
+    
+server:
+  port: 2222
+>>>>>>> d2dfbdad7b24a9e2fc9820ff25e638e24cfaa43e:file-service/src/main/resources/application.yml

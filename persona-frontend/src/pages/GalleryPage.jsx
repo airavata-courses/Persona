@@ -12,7 +12,7 @@ class GalleryPage extends Component {
     super(props);
     this.state = {
       // myImageList: []
-      username: localStorage.getItem()
+      username: localStorage.getItem("username")
     };
   }
 
