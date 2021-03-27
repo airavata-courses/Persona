@@ -53,6 +53,17 @@ class GalleryPage extends Component {
           },
         });
 
+        // for testing purposes 
+        axios
+          .post("http://metadata_service:5000/extract", { data: reader.result, filename: curImg.name}) // base64 (save it to local)
+          .then((res) => {
+            console.log(res);
+            window.location.reload();
+          }).catch((err) => {
+            console.log(err);
+            // window.location.reload();
+          });
+
 
         axiosHttp.post("/file/upload/" + this.state.username, formData, {
           headers: {
