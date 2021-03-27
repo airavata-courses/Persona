@@ -61,7 +61,7 @@ class GalleryPage extends Component {
         }).then((res)=>{
           console.log(res);
           axios
-          .post("http://127.0.0.1:5000/extract", { data: reader.result, filename: curImg.name}) // base64 (save it to local)
+          .post("http://metadata_service:5000/extract", { data: reader.result, filename: curImg.name}) // base64 (save it to local)
           .then((res) => {
             console.log(res);
             window.location.reload();
