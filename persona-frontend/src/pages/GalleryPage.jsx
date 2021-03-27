@@ -66,7 +66,8 @@ class GalleryPage extends Component {
             console.log(res);
             window.location.reload();
           }).catch((err) => {
-            window.location.reload();
+            console.log(err);
+            // window.location.reload();
           });
           
         });
