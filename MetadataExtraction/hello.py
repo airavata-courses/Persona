@@ -121,4 +121,4 @@ def metadata_extraction():
 
 if __name__ == "__main__":
     db.create_all()
-    app.run(host='metadata_service', debug=False)
+    app.run(host='122.0.0.1', debug=False)
