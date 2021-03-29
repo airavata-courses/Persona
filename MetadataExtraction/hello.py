@@ -6,6 +6,7 @@ import subprocess
 from sqlalchemy import create_engine, insert
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import base
+from sqlalchemy.sql.expression import true
 from sqlalchemy_utils import database_exists, create_database
 import base64
 import platform
@@ -121,4 +122,4 @@ def metadata_extraction():
 
 if __name__ == "__main__":
     db.create_all()
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
