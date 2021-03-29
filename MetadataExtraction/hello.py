@@ -122,4 +122,8 @@ def metadata_extraction():
 
 if __name__ == "__main__":
     db.create_all()
+<<<<<<< HEAD
     app.run(host='0.0.0.0', port=5000, debug=True)
+=======
+    app.run(host='0.0.0.0', port=5000, debug=True)
+>>>>>>> 601b8e8fcda701888bce71d85ebfe152313232c2
