@@ -87,6 +87,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<finalName>gatewayservice</finalName>
+					<!--   <mainClass>com.file.FileApplication</mainClass> -->
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -98,5 +102,6 @@
 			<url>https://repo.spring.io/milestone</url>
 		</repository>
 	</repositories>
-
+	
+	  
 </project>

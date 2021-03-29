@@ -1,0 +1,21 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASS
+      - run: cd GatewayService/Gateway/ && ls -la && mvn clean install package && docker image build . -t gatewayservice:latest && docker tag gatewayservice:latest  $DOCKER_USERNAME/gatewayservice:latest
+      - run: docker push $DOCKER_USERNAME/gatewayservice:latest
+
+workflows:
+  build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - gateway-service-ci
