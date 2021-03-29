@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASS
       - run: cd driveservice && ls -la && mvn clean install package && docker image build . -t driveservice:latest && docker tag driveservice:latest  $DOCKER_USERNAME/fileservice-mysql:latest
-      - run: docker push $DOCKER_USERNAME/gfileservice-mysql:latest
+      - run: docker push $DOCKER_USERNAME/fileservice-mysql:latest
 
 workflows:
   build:
