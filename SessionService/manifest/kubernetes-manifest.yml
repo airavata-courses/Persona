@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: session-service
+  labels:
+    app: session-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: session-service
+  template:
+    metadata:
+      labels:
+        app: session-service
+    spec:
+      containers:
+      - name: session-service
+        image: personateam/session-service:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5555
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+        env:
+        - name: DB_USERNAME
+          value: "root"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql
+              key: mysql-root-password
+          value: ""
+        - name: DB_HOST
+          value: "mysql"
+        - name: DB_NAME
+          value: "sessionservice"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: session-service
+spec:
+  selector:
+    app: session-service
+  ports:
+    - protocol: TCP
+      port: 5555
+      targetPort: 5555
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: session-service
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /session
+        pathType: Prefix
+        backend:
+          service:
+            name: session-service
+            port:
+              number: 5555
+      - path: /Authenticate
+        pathType: Prefix
+        backend:
+          service:
+            name: session-service
+            port:
+              number: 5555
+      - path: /unAuthorize
+        pathType: Prefix
+        backend:
+          service:
+            name: session-service
+            port:
+              number: 5555
+

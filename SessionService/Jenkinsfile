@@ -1,0 +1,59 @@
+#!/usr/bin/env groovy
+pipeline {
+    agent { node { label 'worker' } }
+
+    environment {
+        IMAGE_TAG = "${env.BUILD_NUMBER}"
+
+    }
+
+    stages {
+        stage("Clone Repository") {
+            steps {
+                git branch: 'session-service-jenkins', credentialsId: 'bfa23bab-8106-47fd-a41f-4c63413bfe04', url: 'https://github.com/airavata-courses/Persona'
+            }
+        }
+
+        stage("Build Repository") {
+            steps {
+                sh "cd $WORKSPACE && mvn -f SessionService/pom.xml install -DskipTests=true"
+            }
+        }
+
+        stage("Tests Repository") {
+            steps {
+                sh "echo test"
+            }
+
+        }
+
+        stage("Build & Publish") {
+            steps {
+                sh "cd $WORKSPACE/SessionService && docker build -t personateam/session-service:latest ."
+                sh 'docker login -u personateam -p personateam'
+                sh "docker push personateam/session-service:latest"
+            }
+
+        }
+
+        stage("Deleting local Image") {
+
+            steps {
+                sh "docker rmi personateam/session-service:latest"
+            }
+        }
+        
+        stage("Deploy on kubernetes") {
+            steps {
+                sh "cd $WORKSPACE/SessionService/manifest && kubectl apply -f kubernetes-manifest.yml"
+            }
+        }
+    }
+
+    post {
+        always {
+            sh "echo post || true"
+        }
+
+    }
+}
