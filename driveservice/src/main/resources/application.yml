@@ -1,5 +1,6 @@
 # Service registers under this name
 # Control the InternalResourceViewResolver:
+
 spring:
   application:
     name: file-service
