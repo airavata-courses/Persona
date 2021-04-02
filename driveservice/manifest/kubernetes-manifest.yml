@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: driveservice
+  labels:
+    app: driveservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: driveservice
+  template:
+    metadata:
+      labels:
+        app: driveservice
+    spec:
+      containers:
+      - name: driveservice
+        image: personateam/driveservice:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 2222
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+        env:
+        - name: DB_USERNAME
+          value: "root"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql
+              key: mysql-root-password
+          value: ""
+        - name: DB_HOST
+          value: "mysql"
+        - name: DB_NAME
+          value: "driveservice"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: driveservice
+spec:
+  selector:
+    app: driveservice
+  ports:
+    - protocol: TCP
+      port: 2222
+      targetPort: 2222
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: driveservice
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /file
+        pathType: Prefix
+        backend:
+          service:
+            name: driveservice
+            port:
+              number: 2222
+
