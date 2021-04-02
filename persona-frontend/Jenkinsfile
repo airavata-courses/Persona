@@ -1,0 +1,59 @@
+#!/usr/bin/env groovy
+pipeline {
+    agent { node { label 'worker' } }
+
+    environment {
+        IMAGE_TAG = "${env.BUILD_NUMBER}"
+
+    }
+
+    stages {
+        stage("Clone Repository") {
+            steps {
+                git branch: 'frontend_service', credentialsId: 'fd2c3c7c-b8e8-415b-a853-2dccd40b8974', url: 'https://github.com/airavata-courses/Persona'
+            }
+        }
+
+        stage("Build Repository") {
+            steps {
+                sh "echo skip building"
+            }
+        }
+
+        stage("Tests Repository") {
+            steps {
+                sh "echo test"
+            }
+
+        }
+
+        stage("Build & Publish") {
+            steps {
+                sh "cd $WORKSPACE/persona-frontend && docker build -t personateam/frontend-service:latest ."
+                sh 'docker login -u personateam -p personateam'
+                sh "docker push personateam/frontend-service:latest"
+            }
+
+        }
+
+        stage("Deleting local Image") {
+
+            steps {
+                sh "docker rmi personateam/frontend-service:latest"
+            }
+        }
+        
+        stage("Deploy on kubernetes") {
+            steps {
+                sh "cd $WORKSPACE/persona-frontend/manifest && kubectl apply -f kubernetes-manifest.yml"
+            }
+        }
+    }
+
+    post {
+        always {
+            sh "echo post || true"
+        }
+
+    }
+}
