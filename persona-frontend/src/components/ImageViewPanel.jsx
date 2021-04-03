@@ -32,7 +32,7 @@ class ImageViewPanel extends Component {
     if (this.state.status == "gallery") {
       axios
         .get(
-          "http://localhost:2222/file/getFiles?username=" + this.state.username
+          "http://149.165.172.87/file/getFiles?username=" + this.state.username
         )
         .then((res) => {
           console.log(res);
