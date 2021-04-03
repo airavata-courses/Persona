@@ -8,6 +8,7 @@
 ## Project Goal:
 Our goal is to build Photo sharing application, where the user can upload/download and can able to share his photos within a particular group or to user.
 
+
 ## Basic Requirements:
 * Login with your IU Credentials as well as social credentials(google, github)
 * Upload lots of pictures
