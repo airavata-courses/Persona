@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage("Clone Repository") {
             steps {
-                git branch: 'user-service-jenkins', credentialsId: 'bfa23bab-8106-47fd-a41f-4c63413bfe04', url: 'https://github.com/airavata-courses/Persona'
+                git branch: 'googledrive-service', credentialsId: 'fd2c3c7c-b8e8-415b-a853-2dccd40b8974', url: 'https://github.com/anthonyuser123/persona'
             }
         }
 
@@ -45,6 +45,7 @@ pipeline {
         
         stage("Deploy on kubernetes") {
             steps {
+                sh "sed -i 's/VERSION/${env.BUILD_NUMBER}/g' $WORKSPACE/UserService/manifest/kubernetes-manifest.yml"
                 sh "cd $WORKSPACE/UserService/manifest && kubectl apply -f kubernetes-manifest.yml"
             }
         }
