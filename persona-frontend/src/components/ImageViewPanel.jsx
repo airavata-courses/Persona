@@ -122,7 +122,7 @@ class ImageViewPanel extends Component {
   downloadAllImg() {
     axios
       .post(
-        "http://localhost:2222/file/download?username=" + this.state.username,
+        "http://149.165.172.87/file/download?username=" + this.state.username,
         [1, 8, 9, 10, 11],
         { responseType: "blob" }
       ) // base64 (save it to local)
