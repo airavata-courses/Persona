@@ -45,6 +45,7 @@ pipeline {
         
         stage("Deploy on kubernetes") {
             steps {
+                sh "sed -i 's/VERSION/${env.BUILD_NUMBER}/g' $WORKSPACE/GatewayService/Gateway/manifest/kubernetes-manifest.yml"
                 sh "cd $WORKSPACE/GatewayService/Gateway/manifest && kubectl apply -f kubernetes-manifest.yml"
             }
         }
