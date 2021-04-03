@@ -45,6 +45,7 @@ pipeline {
         
         stage("Deploy on kubernetes") {
             steps {
+                sh "sed -i 's/VERSION/${env.BUILD_NUMBER}/g' $WORKSPACE/persona-frontend/manifest/kubernetes-manifest.yml"
                 sh "cd $WORKSPACE/persona-frontend/manifest && kubectl apply -f kubernetes-manifest.yml"
             }
         }
