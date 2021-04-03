@@ -4,6 +4,7 @@ metadata:
   name: gatewayservice
   labels:
     app: gatewayservice
+    version: "VERSION"
 spec:
   replicas: 1
   selector:
@@ -13,6 +14,7 @@ spec:
     metadata:
       labels:
         app: gatewayservice
+        version: "VERSION"
     spec:
       containers:
       - name: gatewayservice
