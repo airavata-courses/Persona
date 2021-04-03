@@ -4,6 +4,7 @@ metadata:
   name: driveservice
   labels:
     app: driveservice
+    version: "VERSION"
 spec:
   replicas: 1
   selector:
@@ -13,6 +14,7 @@ spec:
     metadata:
       labels:
         app: driveservice
+        version: "VERSION"
     spec:
       containers:
       - name: driveservice
@@ -66,4 +68,3 @@ spec:
             name: driveservice
             port:
               number: 2222
-
