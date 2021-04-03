@@ -55,7 +55,7 @@ class LoginPage extends Component {
     },
     client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
     // callback_url: process.env.REACT_APP_GITHUB_CALLBACK_URL,
-    callback_url: "http://localhost:3000",
+    callback_url: "http://149.165.172.87/",
     status: "",
   };
   render() {
