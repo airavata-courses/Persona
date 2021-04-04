@@ -13,8 +13,8 @@ pipeline {
     stages {
         stage("Clone Repository") {
             steps {
-                //git branch: 'gateway-service-jenkins', credentialsId: 'bfa23bab-8106-47fd-a41f-4c63413bfe04', url: 'https://github.com/airavata-courses/Persona'
-                checkout([
+//                git branch: 'gateway-service', credentialsId: 'bfa23bab-8106-47fd-a41f-4c63413bfe04', url: 'https://github.com/airavata-courses/Persona' 
+    checkout([
         $class: 'GitSCM', 
         branches: [[name: '*/gateway-service-jenkins']], 
         doGenerateSubmoduleConfigurations: false, 
