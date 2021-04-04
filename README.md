@@ -6,7 +6,7 @@
    4) Suresh Gunda
 
 ## Project Goal:
-Our goal is to build Photo sharing application, where the user can upload/download and can able to share his photos within a particular group or to user.
+Our goal is to build Photos sharing application, where the user can upload/download and can able to share his photos within a particular group or to user.
 
 
 ## Basic Requirements:
