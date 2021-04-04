@@ -16,7 +16,7 @@ pipeline {
                 //git branch: 'user-service-jenkins', credentialsId: 'bfa23bab-8106-47fd-a41f-4c63413bfe04', url: 'https://github.com/airavata-courses/Persona'
                 checkout([
         $class: 'GitSCM', 
-        branches: [[name: 'user-service-jenkins']], 
+        branches: [[name: 'refs/heads/user-service-jenkins']], 
         doGenerateSubmoduleConfigurations: false, 
         extensions: [[$class: 'CleanCheckout']], 
         submoduleCfg: [], 
