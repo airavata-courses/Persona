@@ -107,16 +107,20 @@ class LoginPage extends Component {
             <LoginGoogle />
           </li>
           <li class="nav-item">
-            {/* <a class="nav-link" href="#" onClick={this.handleGithubLogin}>
+          <a
+              class="nav-link"
+              href={`https://github.com/login/oauth/authorize?scope=user&client_id=${this.state.client_id}&redirect_uri=${this.state.callback_url}`}
+              onClick={this.handleGithubLogin}
+            >
               Log in with GitHub
-            </a> */}
-            <GitHubLogin clientId={process.env.REACT_APP_GITHUB_CLIENT_ID}
+            </a>
+            {/* <GitHubLogin clientId={process.env.REACT_APP_GITHUB_CLIENT_ID}
             onSuccess={(response)=>{
               console.log(response)
             }}
             onFailure={(response)=>{
               console.log(response)
-            }}/>
+            }}/> */}
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
