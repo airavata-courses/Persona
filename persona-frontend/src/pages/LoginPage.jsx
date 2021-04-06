@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "./../components/Header";
 import axios from "axios";
 import LoginGoogle from "./LoginGoogle";
+import GitHubLogin from 'react-github-login';
 
 // Login page for application
 class LoginPage extends Component {
@@ -44,22 +45,22 @@ class LoginPage extends Component {
   };
 
   handleGithubLogin() {
-    axios
-      .get(
-        "https://github.com/login/oauth/authorize",
-        {
-          client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
-          redirect_uri: process.env.REACT_APP_GITHUB_CALLBACK_URL,
-        },
-        {
-          headers: {
-            "Content-type": "application/json",
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response);
-      });
+    // axios
+    //   .get(
+    //     "https://github.com/login/oauth/authorize",
+    //     {
+    //       client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
+    //       redirect_uri: process.env.REACT_APP_GITHUB_CALLBACK_URL,
+    //     },
+    //     {
+    //       headers: {
+    //         "Content-type": "application/json",
+    //       },
+    //     }
+    //   )
+    //   .then((response) => {
+    //     console.log(response);
+    //   });
 
     // console.log(process.env.REACT_APP_GITHUB_CLIENT_ID);
     // alert("I want to login with github", process.env.REACT_APP_GITHUB_CLIENT_ID);
@@ -106,9 +107,16 @@ class LoginPage extends Component {
             <LoginGoogle />
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" onClick={this.handleGithubLogin}>
+            {/* <a class="nav-link" href="#" onClick={this.handleGithubLogin}>
               Log in with GitHub
-            </a>
+            </a> */}
+            <GitHubLogin clientId={process.env.REACT_APP_GITHUB_CLIENT_ID}
+            onSuccess={(response)=>{
+              console.log(response)
+            }}
+            onFailure={(response)=>{
+              console.log(response)
+            }}/>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
