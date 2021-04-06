@@ -1,5 +1,8 @@
 #!/usr/bin/env groovy
 pipeline {
+    triggers {
+        pollSCM('* * * * *') 
+    }
     agent { node { label 'worker' } }
 
     environment {
@@ -10,7 +13,15 @@ pipeline {
     stages {
         stage("Clone Repository") {
             steps {
-               git branch: 'drive-service-jenkins', credentialsId: 'bfa23bab-8106-47fd-a41f-4c63413bfe04', url: 'https://github.com/airavata-courses/Persona'
+               //git branch: 'drive-service-jenkins', credentialsId: 'bfa23bab-8106-47fd-a41f-4c63413bfe04', url: 'https://github.com/airavata-courses/Persona'
+                 checkout([
+        $class: 'GitSCM', 
+        branches: [[name: 'refs/heads/drive-service-jenkins']], 
+        doGenerateSubmoduleConfigurations: false, 
+        extensions: [[$class: 'CleanCheckout']], 
+        submoduleCfg: [], 
+        userRemoteConfigs: [[credentialsId: 'bfa23bab-8106-47fd-a41f-4c63413bfe04', url: 'https://github.com/airavata-courses/Persona']]
+    ])
             }
         }
 
