@@ -25,7 +25,7 @@ class LoginPage extends Component {
           { userName: code },
           {
             headers: {
-              "Content-type": "application/json"
+              "Content-type": "application/json",
             },
           }
         )
@@ -44,6 +44,23 @@ class LoginPage extends Component {
   };
 
   handleGithubLogin() {
+    axios
+      .get(
+        "https://github.com/login/oauth/authorize",
+        {
+          client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
+          redirect_uri: process.env.REACT_APP_GITHUB_CALLBACK_URL,
+        },
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      });
+
     // console.log(process.env.REACT_APP_GITHUB_CLIENT_ID);
     // alert("I want to login with github", process.env.REACT_APP_GITHUB_CLIENT_ID);
   }
@@ -89,11 +106,7 @@ class LoginPage extends Component {
             <LoginGoogle />
           </li>
           <li class="nav-item">
-            <a
-              class="nav-link"
-              href={`https://github.com/login/oauth/authorize?scope=user&client_id=${this.state.client_id}&redirect_uri=${this.state.callback_url}`}
-              onClick={this.handleGithubLogin}
-            >
+            <a class="nav-link" href="#" onClick={this.handleGithubLogin}>
               Log in with GitHub
             </a>
           </li>
