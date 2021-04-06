@@ -54,15 +54,15 @@ class GalleryPage extends Component {
         });
 
         // for testing purposes 
-        axios
-          .post("http://localhost:5000/extract", { data: reader.result, filename: curImg.name}) // base64 (save it to local)
-          .then((res) => {
-            console.log(res);
-            window.location.reload();
-          }).catch((err) => {
-            console.log(err);
-            // window.location.reload();
-          });
+        // axios
+        //   .post("http://localhost:5000/extract", { data: reader.result, filename: curImg.name}) // base64 (save it to local)
+        //   .then((res) => {
+        //     console.log(res);
+        //     window.location.reload();
+        //   }).catch((err) => {
+        //     console.log(err);
+        //     // window.location.reload();
+        //   });
 
 
         axiosHttp.post("/file/upload/" + this.state.username, formData, {
@@ -72,7 +72,7 @@ class GalleryPage extends Component {
         }).then((res)=>{
           console.log(res);
           axios
-          .post("http://metadata_service:5000/extract", { data: reader.result, filename: curImg.name}) // base64 (save it to local)
+          .post("http://149.165.172.87/extract", { data: reader.result, filename: curImg.name}) // base64 (save it to local)
           .then((res) => {
             console.log(res);
             window.location.reload();
