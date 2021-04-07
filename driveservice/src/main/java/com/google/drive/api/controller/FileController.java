@@ -15,7 +15,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.List;
 import java.util.Set;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/file")
 public class FileController {
