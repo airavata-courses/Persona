@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Header from "./../components/Header";
 import axios from "axios";
 import LoginGoogle from "./LoginGoogle";
-import GitHubLogin from 'react-github-login';
+import LoginGithub from "react-login-github";
 
 // Login page for application
 class LoginPage extends Component {
@@ -19,21 +19,55 @@ class LoginPage extends Component {
 
   componentDidMount() {
     var code = window.location.href.split("?code=")[1];
+    // https://github.com/login/oauth/access_token?client_id=Iv1.f41f34fd38e613e0&client_secret=16012d7b6ff40a6bc6bef551eb1f1b29c5a09a5d&code=e921b5823791f0256d72
+    // alert(code);
     if (code) {
-      axios
-        .post(
-          "http://149.165.172.87/user/save",
-          { userName: code },
-          {
-            headers: {
-              "Content-type": "application/json",
-            },
-          }
-        )
-        .then((response) => {
-          console.log(response);
-          localStorage.setItem("username", code);
-          window.location.href = "/gallery";
+      const GITHUB_AUTH_ACCESSTOKEN_URL =
+        "https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token";
+      const CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID;
+      const CLIENT_SECRET = process.env.REACT_APP_GITHUB_SECRET;
+      const CODE = code;
+
+      axios({
+        method: "post",
+        url: GITHUB_AUTH_ACCESSTOKEN_URL,
+        data: {
+          client_id: CLIENT_ID,
+          client_secret: CLIENT_SECRET,
+          code: CODE,
+        },
+      })
+        .then(function (response) {
+          // res.redirect('http://myjsapp/' + response.data)
+          console.log(response.data.split("&")[0].split("=")[1]);
+          var access_token = response.data.split("&")[0].split("=")[1];
+          axios
+            .get("https://api.github.com/user", {
+              headers: {
+                Authorization: `token ${access_token}`,
+              },
+            })
+            .then((response) => {
+              console.log(response.data.id);
+              axios
+                .post(
+                  "http://149.165.172.87/user/save",
+                  { userName: response.data.id },
+                  {
+                    headers: {
+                      "Content-type": "application/json",
+                    },
+                  }
+                )
+                .then((response) => {
+                  console.log(response);
+                  localStorage.setItem("username", response.data.id);
+                  window.location.href = "/gallery";
+                });
+            });
+        })
+        .catch(function (error) {
+          console.error("Error " + error.message);
         });
     }
   }
@@ -45,25 +79,16 @@ class LoginPage extends Component {
   };
 
   handleGithubLogin() {
-    // axios
-    //   .get(
-    //     "https://github.com/login/oauth/authorize",
-    //     {
-    //       client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
-    //       redirect_uri: process.env.REACT_APP_GITHUB_CALLBACK_URL,
-    //     },
-    //     {
-    //       headers: {
-    //         "Content-type": "application/json",
-    //       },
-    //     }
-    //   )
-    //   .then((response) => {
-    //     console.log(response);
-    //   });
-
-    // console.log(process.env.REACT_APP_GITHUB_CLIENT_ID);
-    // alert("I want to login with github", process.env.REACT_APP_GITHUB_CLIENT_ID);
+    axios({
+      method: "post",
+      url: `https://github.com/login/oauth/access_token?scope=user&client_id=${this.state.client_id}&redirect_uri=${this.state.callback_url}`,
+      data: {
+        client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
+        client_secret: process.env.REACT_APP_GITHUB_SECRET,
+      },
+    }).then((response) => {
+      console.log(response);
+    });
   }
 
   state = {
@@ -72,8 +97,8 @@ class LoginPage extends Component {
       password: "",
     },
     client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
-    // callback_url: process.env.REACT_APP_GITHUB_CALLBACK_URL,
-    callback_url: "http://149.165.172.87/",
+    callback_url: process.env.REACT_APP_GITHUB_CALLBACK_URL,
+    // callback_url: "http://149.165.172.87/",
     status: "",
   };
   render() {
@@ -107,20 +132,12 @@ class LoginPage extends Component {
             <LoginGoogle />
           </li>
           <li class="nav-item">
-          <a
+            <a
               class="nav-link"
               href={`https://github.com/login/oauth/authorize?scope=user&client_id=${this.state.client_id}&redirect_uri=${this.state.callback_url}`}
-              onClick={this.handleGithubLogin}
             >
               Log in with GitHub
             </a>
-            {/* <GitHubLogin clientId={process.env.REACT_APP_GITHUB_CLIENT_ID}
-            onSuccess={(response)=>{
-              console.log(response)
-            }}
-            onFailure={(response)=>{
-              console.log(response)
-            }}/> */}
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
