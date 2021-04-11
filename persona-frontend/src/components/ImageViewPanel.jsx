@@ -29,8 +29,8 @@ class ImageViewPanel extends Component {
   }
 
   componentDidMount() {
-    alert(this.state.username);
-    alert(localStorage.getItem("username"));
+    // alert(this.state.username);
+    // alert(localStorage.getItem("username"));
     if (this.state.status == "gallery") {
       axios
         .get(

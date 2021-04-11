@@ -63,8 +63,8 @@ class LoginPage extends Component {
                   console.log(response);
                   // sessionStorage.setItem("username", response.data.id)
                   localStorage.setItem("username", oauth_user_id);
-                  alert(localStorage.getItem("username"));
-                  alert(oauth_user_id)
+                  // alert(localStorage.getItem("username"));
+                  // alert(oauth_user_id)
                   // alert(sessionStorage.getItem("username"));
                   window.location.href = "/gallery";
                 });
