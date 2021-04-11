@@ -4,16 +4,16 @@ import axios from "axios";
 
 class LoginGoogle extends Component {
   responseGoogle = (response) => {
-    console.log("Success");
-    console.log(response);
+    // console.log("Success");
+    // console.log(response);
 
-    const id = { userName: response["profileObj"]["email"] };
-    axios
-      .post("http://149.165.172.87/user/save", id)
-      .then((response) => {
-        localStorage.setItem("username", id);
-        console.log(response)
-      });
+    // const id = { userName: response["profileObj"]["email"] };
+    // axios
+    //   .post("http://149.165.172.87/user/save", id)
+    //   .then((response) => {
+    //     localStorage.setItem("username", id);
+    //     console.log(response)
+    //   });
     window.location = "/gallery";
   };
 

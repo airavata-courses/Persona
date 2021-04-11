@@ -62,6 +62,7 @@ class LoginPage extends Component {
                 .then((response) => {
                   console.log(response);
                   localStorage.setItem("username", response.data.id);
+                  alert(localStorage.getItem("username"));
                   window.location.href = "/gallery";
                 });
             });
