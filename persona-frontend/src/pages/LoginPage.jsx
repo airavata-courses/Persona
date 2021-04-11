@@ -8,7 +8,6 @@ import LoginGithub from "react-login-github";
 class LoginPage extends Component {
   handleSubmit = (post) => {
     post.title = "USERNAME";
-
     axios
       .put("http://149.165.172.87/user/save", { userName: "test" })
       .then((response) => this.setState({ status: response }));
@@ -61,8 +60,10 @@ class LoginPage extends Component {
                 )
                 .then((response) => {
                   console.log(response);
+                  sessionStorage.setItem("username", response.data.id)
                   localStorage.setItem("username", response.data.id);
                   alert(localStorage.getItem("username"));
+                  alert(sessionStorage.getItem("username"));
                   window.location.href = "/gallery";
                 });
             });
