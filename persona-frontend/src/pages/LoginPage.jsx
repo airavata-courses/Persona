@@ -48,6 +48,7 @@ class LoginPage extends Component {
             })
             .then((response) => {
               console.log(response.data.id);
+              var oauth_user_id = response.data.id
               axios
                 .post(
                   "http://149.165.172.87/user/save",
@@ -60,10 +61,11 @@ class LoginPage extends Component {
                 )
                 .then((response) => {
                   console.log(response);
-                  sessionStorage.setItem("username", response.data.id)
-                  localStorage.setItem("username", response.data.id);
+                  // sessionStorage.setItem("username", response.data.id)
+                  localStorage.setItem("username", oauth_user_id);
                   alert(localStorage.getItem("username"));
-                  alert(sessionStorage.getItem("username"));
+                  alert(oauth_user_id)
+                  // alert(sessionStorage.getItem("username"));
                   window.location.href = "/gallery";
                 });
             });
