@@ -1,5 +1,6 @@
 # Service registers under this name
 # Control the InternalResourceViewResolver:
+
 spring:
   application:
     name: file-service
@@ -10,9 +11,9 @@ spring:
      #   password: password
         
   datasource:
-        url: jdbc:mysql://localhost:3306/userservice?useSSL=false
-        username: root
-        password: 12345678
+        url: jdbc:mysql://${DB_HOST}/${DB_NAME}?useSSL=false
+        username: ${DB_USERNAME}
+        password: ${DB_PASSWORD}
    
   jpa:
         show-sql: true

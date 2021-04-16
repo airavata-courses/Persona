@@ -92,9 +92,15 @@ public class FileServiceImpl implements FileService {
     public ByteArrayOutputStream download(List<Long> ids, String userName) {
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             try (ZipOutputStream zos = new ZipOutputStream(baos)) {
+            	Set<String> distinctFileNames = new HashSet<>();
                 for (Long id : ids) {
                     Document doc = documentRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("File not found"));
-                    ZipEntry entry = new ZipEntry(doc.getFileName());
+                    String curFileName = doc.getFileName();
+                    String originalName = curFileName;
+                    for (int i = 1; !distinctFileNames.add(curFileName); i++) {
+                    	curFileName = originalName + "_"+ i;
+                    }
+                    ZipEntry entry = new ZipEntry(curFileName);
                     zos.putNextEntry(entry);
                     zos.write(googleDrive.download(doc.getFileId()).toByteArray());
                 }
