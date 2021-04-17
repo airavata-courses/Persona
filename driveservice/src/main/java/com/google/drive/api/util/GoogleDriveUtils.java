@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 import com.google.api.client.http.FileContent;
 import com.google.api.services.drive.Drive;
+import com.google.api.services.drive.Drive.Files;
+import com.google.api.services.drive.Drive.Files.Get;
 import com.google.api.services.drive.model.File;
 
 @Component
@@ -37,7 +39,12 @@ public class GoogleDriveUtils {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		drive.files().get(fileId)
 	    .executeMediaAndDownloadTo(outputStream);
-//		System.out.println("\n\n" + fileId + ":" + outputStream.toString() + "\n\n");
+		Get curFile = drive.files().get(fileId);
+		
+//		curFile.getJsonContent().toString();
+		
+//		contentHints.thumbnail.image
+		System.out.println("\n\n" + fileId + ":" + curFile.getJsonContent().toString() + "\n\n");
 		return outputStream;
 	}
 
