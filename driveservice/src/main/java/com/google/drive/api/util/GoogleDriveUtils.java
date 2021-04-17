@@ -39,10 +39,6 @@ public class GoogleDriveUtils {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		drive.files().get(fileId)
 	    .executeMediaAndDownloadTo(outputStream);
-//		Get curFile = drive.files().get(fileId);
-//		curFile.content
-//		contentHints.thumbnail.image
-//		System.out.println("\n\n" + fileId + ":" + outputStream.toString() + "\n\n");
 		return outputStream;
 	}
 
@@ -58,6 +54,10 @@ public class GoogleDriveUtils {
 				byte[] bytes = outputStream.toByteArray();
 
 				outputStream.reset();
+				System.out.println("Print Byte: ");
+				for(byte curByte: bytes) {
+					System.out.println(curByte);
+				}
 				return bytes;
 			}catch (Exception e ) {
                throw new AppException("Can't read file from driver");
