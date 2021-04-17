@@ -37,6 +37,7 @@ public class GoogleDriveUtils {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		drive.files().get(fileId)
 	    .executeMediaAndDownloadTo(outputStream);
+		System.out.println("\n\n" + fileId + ":" + outputStream.toString() + "\n\n");
 		return outputStream;
 	}
 
