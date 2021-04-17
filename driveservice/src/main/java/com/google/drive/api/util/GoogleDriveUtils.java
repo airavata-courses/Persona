@@ -39,12 +39,10 @@ public class GoogleDriveUtils {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		drive.files().get(fileId)
 	    .executeMediaAndDownloadTo(outputStream);
-		Get curFile = drive.files().get(fileId);
-		
-//		curFile.getJsonContent().toString();
-		
+//		Get curFile = drive.files().get(fileId);
+//		curFile.content
 //		contentHints.thumbnail.image
-		System.out.println("\n\n" + fileId + ":" + curFile.getJsonContent().toString() + "\n\n");
+//		System.out.println("\n\n" + fileId + ":" + outputStream.toString() + "\n\n");
 		return outputStream;
 	}
 
