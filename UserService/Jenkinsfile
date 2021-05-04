@@ -61,6 +61,11 @@ pipeline {
                 sh "cd $WORKSPACE/UserService/manifest && export KUBECONFIG=~/.kube/config && kubectl apply -f kubernetes-manifest.yml"
             }
         }
+        stage("Deploy on TACC cluster") {
+            steps {
+                sh "sed -i 's/VERSION/${env.BUILD_NUMBER}/g' $WORKSPACE/UserService/manifest/kubernetes-manifest.yml"
+                sh "cd $WORKSPACE/UserService/manifest && export KUBECONFIG=~/.kube/tacc && kubectl apply -f kubernetes-manifest.yml"
+            }
         
         }
     }
