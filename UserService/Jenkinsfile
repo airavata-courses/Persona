@@ -70,6 +70,7 @@ pipeline {
     }
 
     post {
+        
         always {
             sh "echo post || true"
         }
