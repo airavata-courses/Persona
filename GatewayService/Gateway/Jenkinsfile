@@ -16,7 +16,7 @@ pipeline {
 //                git branch: 'gateway-service', credentialsId: 'bfa23bab-8106-47fd-a41f-4c63413bfe04', url: 'https://github.com/airavata-courses/Persona' 
     checkout([
         $class: 'GitSCM', 
-        branches: [[name: '*/gateway-service-jenkins']], 
+        branches: [[name: 'refs/heads/gateway-service-jenkins']], 
         doGenerateSubmoduleConfigurations: false, 
         extensions: [[$class: 'CleanCheckout']], 
         submoduleCfg: [], 
@@ -54,10 +54,15 @@ pipeline {
             }
         }
         
-        stage("Deploy on kubernetes") {
+        stage("Deploy on UI cluster") {
             steps {
                 sh "sed -i 's/VERSION/${env.BUILD_NUMBER}/g' $WORKSPACE/GatewayService/Gateway/manifest/kubernetes-manifest.yml"
-                sh "cd $WORKSPACE/GatewayService/Gateway/manifest && kubectl apply -f kubernetes-manifest.yml"
+                sh "cd $WORKSPACE/GatewayService/Gateway/manifest && export KUBECONFIG=/home/ubuntu/.kube/config && kubectl apply -f kubernetes-manifest.yml"
+            }
+        }
+        stage("Deploy on TACC cluster") {
+            steps {
+                sh "cd $WORKSPACE/GatewayService/Gateway/manifest && export KUBECONFIG=/home/ubuntu/.kube/tacc && kubectl apply -f kubernetes-manifest.yml"
             }
         }
     }
