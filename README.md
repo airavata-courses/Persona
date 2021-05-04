@@ -1,9 +1,10 @@
 # Persona
- # Spring 2021 Team:
+<!-- # Spring 2021 Team:
    1) Xiao Xiong (the github account BrockDW and xixiong are both representing Xiao Xiong)
    2) Kenneth Zhang
    3) Saitheja Velmula
    4) Suresh Gunda
+   -->
 
 ## Project Goal:
 Our goal is to build Photos sharing application, where the user can upload/download and can able to share his photos within a particular group or to user.
