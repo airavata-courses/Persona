@@ -2,6 +2,7 @@
 pipeline {
     triggers {
         pollSCM('* * * * *') 
+        
     }
     agent { node { label 'worker' } }
 
