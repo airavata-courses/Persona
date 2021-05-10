@@ -84,7 +84,7 @@ class LoginPage extends Component {
 
   handleGithubLogin() {
     axios({
-      method: "post",
+      method: "post", 
       url: `https://github.com/login/oauth/access_token?scope=user&client_id=${this.state.client_id}&redirect_uri=${this.state.callback_url}`,
       data: {
         client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
