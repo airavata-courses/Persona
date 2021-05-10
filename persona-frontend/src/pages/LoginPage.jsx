@@ -9,7 +9,7 @@ class LoginPage extends Component {
   handleSubmit = (post) => {
     post.title = "USERNAME";
     axios
-      .put("http://149.165.172.87/user/save", { userName: "test" })
+      .put("http://149.165.172.184/user/save", { userName: "test" })
       .then((response) => this.setState({ status: response }));
 
     // Call the server
@@ -51,7 +51,7 @@ class LoginPage extends Component {
               var oauth_user_id = response.data.id
               axios
                 .post(
-                  "http://149.165.172.87/user/save",
+                  "http://149.165.172.184/user/save",
                   { userName: response.data.id },
                   {
                     headers: {
