@@ -82,18 +82,18 @@ class LoginPage extends Component {
     this.setState({ account });
   };
 
-  handleGithubLogin() {
-    axios({
-      method: "post", 
-      url: `https://github.com/login/oauth/access_token?scope=user&client_id=${this.state.client_id}&redirect_uri=${this.state.callback_url}`,
-      data: {
-        client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
-        client_secret: process.env.REACT_APP_GITHUB_SECRET,
-      },
-    }).then((response) => {
-      console.log(response);
-    });
-  }
+  // handleGithubLogin() {
+  //   axios({
+  //     method: "post", 
+  //     url: `https://github.com/login/oauth/access_token?scope=user&client_id=${this.state.client_id}&redirect_uri=${this.state.callback_url}`,
+  //     data: {
+  //       client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
+  //       client_secret: process.env.REACT_APP_GITHUB_SECRET,
+  //     },
+  //   }).then((response) => {
+  //     console.log(response);
+  //   });
+  // }
 
   state = {
     account: {
@@ -138,7 +138,7 @@ class LoginPage extends Component {
           <li class="nav-item">
             <a
               class="nav-link"
-              href={`https://github.com/login/oauth/authorize?scope=user&client_id=${this.state.client_id}&redirect_uri=${this.state.callback_url}`}
+              href={`https://github.com/login/oauth/authorize?scope=user&client_id=${this.state.client_id}&redirect_uri=http://149.165.172.184/`}
             >
               Log in with GitHub
             </a>
