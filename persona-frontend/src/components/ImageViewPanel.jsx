@@ -34,7 +34,7 @@ class ImageViewPanel extends Component {
     if (this.state.status == "gallery") {
       axios
         .get(
-          "http://149.165.172.87/file/getFiles?username=" + this.state.username
+          "http://149.165.172.184/file/getFiles?username=" + this.state.username
         )
         .then((res) => {
           console.log(res);
@@ -124,7 +124,7 @@ class ImageViewPanel extends Component {
   downloadAllImg() {
     axios
       .post(
-        "http://149.165.172.87/file/download?username=" + this.state.username,
+        "http://149.165.172.184/file/download?username=" + this.state.username,
         [1,2, 8, 9, 10, 11],
         { responseType: "blob" }
       ) // base64 (save it to local)
