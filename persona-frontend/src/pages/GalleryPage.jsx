@@ -47,7 +47,7 @@ class GalleryPage extends Component {
         formData.append("files", curImg);
 
         var axiosHttp = axios.create({
-          baseURL: "http://149.165.172.87",
+          baseURL: "http://149.165.172.184",
           headers: {
             "Content-type": "application/json",
           },
@@ -72,7 +72,7 @@ class GalleryPage extends Component {
         }).then((res)=>{
           console.log(res);
           axios
-          .post("http://149.165.172.87/extract", { data: reader.result, filename: curImg.name}) // base64 (save it to local)
+          .post("http://149.165.172.184/extract", { data: reader.result, filename: curImg.name}) // base64 (save it to local)
           .then((res) => {
             console.log(res);
             window.location.reload();

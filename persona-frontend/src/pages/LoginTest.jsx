@@ -11,7 +11,7 @@ class LoginTest extends Component {
 
   registerUser = () => {
     axios
-      .post("http://149.165.172.87/user/save", this.state.account)
+      .post("http://149.165.172.184/user/save", this.state.account)
       .then((response) => console.log(response));
   };
 
