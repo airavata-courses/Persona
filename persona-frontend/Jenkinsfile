@@ -54,10 +54,16 @@ pipeline {
             }
         }
         
-        stage("Deploy on kubernetes") {
+        stage("Deploy on UI cluster") {
             steps {
                 sh "sed -i 's/VERSION/${env.BUILD_NUMBER}/g' $WORKSPACE/persona-frontend/manifest/kubernetes-manifest.yml"
-                sh "cd $WORKSPACE/persona-frontend/manifest && kubectl apply -f kubernetes-manifest.yml"
+                sh "cd $WORKSPACE/persona-frontend/manifest && export KUBECONFIG=/home/ubuntu/.kube/config && kubectl apply -f kubernetes-manifest.yml"
+            }
+        }
+        stage("Deploy on TACC cluster") {
+            steps {
+                sh "sed -i 's/VERSION/${env.BUILD_NUMBER}/g' $WORKSPACE/persona-frontend/manifest/kubernetes-manifest.yml"
+                sh "cd $WORKSPACE/persona-frontend/manifest && export KUBECONFIG=/home/ubuntu/.kube/tacc && kubectl apply -f kubernetes-manifest.yml"
             }
         }
     }
